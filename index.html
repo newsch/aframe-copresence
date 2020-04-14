@@ -14,6 +14,8 @@
             socket.emit('update-pos', { position, rotation });
         }
 
+        // TODO: make this a class, keep track of all with map of ids
+
         function findVisitorRepr(id) {
             let el = document.querySelector('#user-' + id);
             return el;
@@ -39,6 +41,7 @@
             headEl.setAttribute('radius-bottom', 0.25);
             // rotate to point towards camera direction
             headEl.object3D.rotation.x = Math.PI / 2;
+            el.appendChild(headEl);
 
             // line for pointing
             var lineEl = document.createElement('a-entity');
@@ -50,9 +53,17 @@
             });
             el.appendChild(lineEl);
 
-            el.appendChild(headEl);
-
-
+            // name text
+            var textEl = document.createElement('a-text');
+            textEl.setAttribute('value', id);
+            textEl.setAttribute('align', 'center');
+            textEl.getAttribute('position').y = 0.5;
+            textEl.object3D.rotation.y = Math.PI;
+            el.appendChild(textEl);
+            // make a second to point backwards
+            var textEl2 = textEl.cloneNode();
+            textEl2.getAttribute('position').y = 0.5;
+            el.appendChild(textEl2);
 
             sceneEl.appendChild(el);
             return el;
