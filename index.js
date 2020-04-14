@@ -7,13 +7,14 @@ app.get('/', function(req, res){
 });
 
 io.on('connection', function(socket){
-    console.log('a user connected');
+    console.log(`visitor connected: ${socket.id} (${socket.handshake.address})`);
     socket.on('update-pos', (pos) => {
         // console.log(pos);
         socket.volatile.broadcast.emit('visitor-update-pos', {id: socket.id, ...pos});
     })
     socket.on('disconnect', function() {
         socket.broadcast.emit('visitor-disconnect', {id: socket.id});
+        console.log(`visitor disconneted: ${socket.id} (${socket.handshake.address})`);
     });
 });
 
