@@ -1,4 +1,7 @@
-var socket = io();
+// Initialize socket.io if not already
+if (socket === undefined) {
+    var socket = io();
+}
 
 function sendPosition(position, rotation) {
     socket.emit('update-pos', { position, rotation });
