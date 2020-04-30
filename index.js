@@ -16,7 +16,7 @@ io.on('connection', function(socket){
     })
     socket.on('disconnect', function() {
         socket.broadcast.emit('visitor-disconnect', {id: socket.id});
-        console.log(`visitor disconneted: ${socket.id} (${socket.handshake.address})`);
+        console.log(`visitor disconnected: ${socket.id} (${socket.handshake.address})`);
     });
 });
 
