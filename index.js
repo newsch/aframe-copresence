@@ -18,6 +18,9 @@ io.on('connection', function(socket){
         // console.log(pos);
         socket.volatile.broadcast.emit('visitor-update-pos', {id: socket.id, ...pos});
     })
+    socket.on('update-data'), (data) => {
+        socket.broadcast.emit('visitor-update-data', {id: socket.id, data});
+    }
     socket.on('disconnect', function() {
         socket.broadcast.emit('visitor-disconnect', {id: socket.id});
         console.log(`visitor disconnected: ${socket.id} (${socket.handshake.address})`);
